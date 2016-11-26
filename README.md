@@ -5,7 +5,7 @@ Keeps track of who you follow, and who's following you.
 
 Add the package from Atmosphere.
 
-    meteor add brewhk:followers
+    meteor add brewhk:follower
 
 ##### Client-side Functions
 
