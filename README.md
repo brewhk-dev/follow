@@ -11,6 +11,8 @@ Add the package from Atmosphere.
 
 All callbacks are called with `error` as its first parameter, and `result` as its second.
 
+Developers should first subscribe to the relevant publications before making the `getXXX` calls.
+
 ###### Follow user
 
 Follow a user.
@@ -29,25 +31,37 @@ Unfollow all users.
 
 ###### Get Follower Data
 
+Get an array of user objects who are following the specified user.
+
+    Follower.getFollowers(userId)
+
 Get an array of ID of users who are following the specified user.
 
-    Follower.getFollowers(userId, callback)
-
-Get an array of ID of users who the specified user is following.
-
-    Follower.getFollowing(userId, callback)
+    Follower.getFollowerIds(userId)
 
 Get the number of users following the specified user.
 
-    Follower.getFollowerCount(userId, callback)
+    Follower.getFollowerCount(userId)
+
+Returns a boolean value of whether you are being followed by a particular user.
+
+    Follower.checkIfFollower(userId)
+
+Get an array of user objects who the specified user is following.
+
+    Follower.getFollowings(userId)
+
+Get an array of ID of users who the specified user is following.
+
+    Follower.getFollowingIds(userId)
 
 Get the number of users the specified user is following.
 
-    Follower.getFollowingCount(userId, callback)
+    Follower.getFollowingCount(userId)
 
 Returns a boolean value of whether you are following a particular user.
 
-    Follower.checkIfFollowing(userId, callback)
+    Follower.checkIfFollowing(userId)
 
 ##### Server-side Methods
 
@@ -55,49 +69,27 @@ Returns a boolean value of whether you are following a particular user.
 
 Follow a user.
 
-    Meteor.call('followerFollow', uid);
+    Meteor.call('brewhk:follower/follow', userId);
 
 ###### Unfollow
 
 Unfollow a user.
 
-    Meteor.call('followerUnfollow', uid);
+    Meteor.call('brewhk:follower/unfollow', userId);
 
 Unfollow all users.
 
-    Meteor.call('followerUnfollowAll');
-
-###### Get Follower Data
-
-Get an array of ID of users who are following the specified user.
-
-    Meteor.call('followerGetFollowers', uid);
-
-Get an array of ID of users who the specified user is following.
-
-    Meteor.call('followerGetFollowing', uid);
-
-Get the number of users following the specified user.
-
-    Meteor.call('followerGetFollowersCount', uid);
-
-Get the number of users the specified user is following.
-
-    Meteor.call('followerGetFollowingCount', uid);
-
-Returns a boolean value of whether you are following a particular user.
-
-    Meteor.call('followerCheckIfFollowing', uid);
+    Meteor.call('brewhk:follower/unfollowAll');
 
 ###### Delete
 
 Delete all data associated with a particular user.
 
-    Meteor.call('followerDeleteUserData', uid);
+    Meteor.call('brewhk:follower/removeUserData', userId);
 
 ##### Publication / Subscription
 
 `Follower` provides two publications.
 
-    Meteor.subscribe('followers', uid); // Subscribes to the list of followers by the user
-    Meteor.subscribe('following', uid); // Subscribes to the list of users followed by the user
+    Meteor.subscribe('brewhk:follower/followers', userId); // Subscribes to the list of followers by the user
+    Meteor.subscribe('brewhk:follower/following', userId); // Subscribes to the list of users followed by the user

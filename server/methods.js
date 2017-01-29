@@ -1,78 +1,22 @@
+import { Meteor } from 'meteor/meteor';
+import { check } from 'meteor/check';
+
+import { follow, unfollow, unfollowAll, removeUserData } from './functions.js';
+
 Meteor.methods({
-	followerFollow: function (uid) {
-		check(uid, String);
-		return Followers.update({
-			followee: uid,
-			follower: this.userId
-		}, {
-			$set: {
-				invalidatedAt: undefined
-			},
-			$setOnInsert: {
-				followee: uid,
-				follower: this.userId,
-				invalidatedAt: undefined
-			}
-		}, {
-			upsert: true
-		});
+	'brewhk:follower/follow': function (followingId) {
+		check(followingId, String);
+    return follow(this.userId, followingId);
 	},
-	followerUnfollow: function (uid) {
-		check(uid, String);
-		return Followers.remove({
-			followee: uid,
-			follower: this.userId
-		});
+	'brewhk:follower/unfollow': function (followingId) {
+		check(followingId, String);
+    return unfollow(this.userId, followingId)
 	},
-	followerUnfollowAll: function () {
-		return Followers.remove({
-			follower: this.userId
-		});
+	'brewhk:follower/unfollowAll': function () {
+    return unfollowAll(this.userId);
 	},
-	followerGetFollowers: function (uid) {
-		check(uid, String);
-		let followers = Followers.find({
-			followee: uid
-		}).fetch();
-		return _.map(followers, function (value, index, list) {
-			return value.follower;
-		});
-	},
-	followerGetFollowersCount: function (uid) {
-		check(uid, String);
-		return Followers.find({
-			followee: uid
-		}).count();
-	},
-	followerGetFollowing: function (uid) {
-		check(uid, String);
-		let following = Followers.find({
-			follower: uid
-		}).fetch();
-		return _.map(following, function (value, index, list) {
-			return value.followee;
-		});
-	},
-	followerGetFollowingCount: function (uid) {
-		check(uid, String);
-		return Followers.find({
-			follower: uid
-		}).count();
-	},
-	followerCheckIfFollowing: function (uid) {
-		check(uid, String);
-		return !!Followers.findOne({
-			followee: uid,
-			follower: this.userId
-		});
-	},
-	followerDeleteUserData: function (uid) {
-		check(uid, String);
-		return Followers.remove({
-			$or: [
-				{ followee: uid },
-				{ follower: this.userId }
-			]
-		});
+	'brewhk:follower/removeUserData': function (userId) {
+		check(userId, String);
+    return removeUserData(userId);
 	}
 });
