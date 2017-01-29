@@ -8,7 +8,7 @@ Package.describe({
 
 Package.onUse(function(api) {
   api.versionsFrom('1.4.2.3');
-  api.use(['ecmascript', 'check', 'mongo', 'aldeed:collection2']);
+  api.use(['ecmascript', 'check', 'mongo', 'aldeed:collection2@2.10.0']);
   api.mainModule('client/index.js', 'client');
   api.mainModule('server/index.js', 'server');
 });
