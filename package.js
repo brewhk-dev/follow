@@ -1,6 +1,6 @@
 Package.describe({
   name: 'brewhk:follower',
-  version: '0.1.0',
+  version: '0.1.1',
   summary: 'Keeps track of who you follow, and who\'s following you.',
   git: 'https://github.com/brewhk/follower.git',
   documentation: 'README.md'
