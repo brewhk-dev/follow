@@ -1,4 +1,4 @@
-import Followers from '../lib/index.js';
+import Followers from '../lib/collections.js';
 import './methods.js';
 import './publications.js';
 

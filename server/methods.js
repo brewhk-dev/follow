@@ -1,7 +1,12 @@
 import { Meteor } from 'meteor/meteor';
 import { check } from 'meteor/check';
 
-import { follow, unfollow, unfollowAll, removeUserData } from './functions.js';
+import {
+  follow,
+  unfollow,
+  unfollowAll,
+  removeUserData,
+} from './functions.js';
 
 Meteor.methods({
 	'brewhk:follower/follow': function (followingId) {

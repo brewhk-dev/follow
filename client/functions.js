@@ -1,7 +1,15 @@
 import { Meteor } from 'meteor/meteor';
 import { check } from 'meteor/check';
 
-import { checkForRelationship, getFollowerIdsOfUser, getFollowersOfUser, getFollowerCountOfUser, getFollowingIdsOfUser, getFollowingsOfUser, getFollowingCountOfUser } from '../lib/functions.js';
+import {
+  checkForRelationship,
+  getFollowerIdsOfUser,
+  getFollowersOfUser,
+  getFollowerCountOfUser,
+  getFollowingIdsOfUser,
+  getFollowingsOfUser,
+  getFollowingCountOfUser,
+} from '../lib/functions.js';
 
 Follower = {};
 

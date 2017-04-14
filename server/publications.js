@@ -1,7 +1,12 @@
 import { Meteor } from 'meteor/meteor';
 import { check } from 'meteor/check';
 
-import { getFollowersCursorOfUser, getFollowingsCursorOfUser, getCursorOfMappingOfUserFollowers, getCursorOfMappingOfWhoUserFollows } from '../lib/functions.js';
+import {
+  getFollowersCursorOfUser,
+  getFollowingsCursorOfUser,
+  getCursorOfMappingOfUserFollowers,
+  getCursorOfMappingOfWhoUserFollows
+} from '../lib/functions.js';
 
 // Publish the mapping information and users of this user's followers
 Meteor.publish('brewhk:follower/followers', function (userId = this.userId) {
@@ -16,7 +21,10 @@ Meteor.publish('brewhk:follower/followers', function (userId = this.userId) {
 Meteor.publish('brewhk:follower/following', function (userId = this.userId) {
 	check(userId, String);
 	return [
+    // Get a cursor of users that this user follows
     getFollowingsCursorOfUser(userId),
+
+    // Get all mapping of who this user follows
     getCursorOfMappingOfWhoUserFollows(userId),
   ];
 });

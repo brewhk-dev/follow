@@ -1,5 +1,5 @@
 import { Meteor } from 'meteor/meteor';
-import { Followers } from '../lib/index.js';
+import Followers from '../lib/collections.js';
 
 const follow = function (followerId, followingId) {
   return Followers.upsert({
@@ -35,4 +35,9 @@ const removeUserData = function (userId) {
   });
 }
 
-export { follow, unfollow, unfollowAll, removeUserData };
+export {
+  follow,
+  unfollow,
+  unfollowAll,
+  removeUserData,
+};
